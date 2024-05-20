@@ -56,11 +56,13 @@ p
 @src/main/java/io/codelex/flightplanner/FlightPlannerService.java,b\5\b5a604b2fe9e936461d0cdaae126f2ac9962a01b
 ?
 test/fixture.ts,4\d\4d1906e1a0f4d03909ff2b2eb8251bbcfdf1bcb5
-}
-Msrc/main/java/io/codelex/flightplanner/exceptions/GlobalExceptionHandler.java,5\0\506b1cb011ae18e35a901410a5ea2eb999ce7876
 H
 src/CustomerFlightApi.ts,e\9\e9b9061a7122510c48efd83fc0b490aac42aa526
 E
 src/api/PageResult.ts,d\a\daec74aca8b596aaff05e087bc502247efeb6677
 m
 =src/main/java/io/codelex/flightplanner/domain/PageResult.java,e\d\ed37e2f88ee8abf6a7eb83697f76c04f50f4ff1a
+O
+src/api/SearchFlightsRequest.ts,d\3\d3b366a0f16ec3b6b3e6e9d9195c22bd4473036e
+w
+Gsrc/main/java/io/codelex/flightplanner/domain/SearchFlightsRequest.java,7\c\7cef062b7cdb4a33196d08289f8920a45a8da85c

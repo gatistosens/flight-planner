@@ -2,10 +2,13 @@ package io.codelex.flightplanner;
 
 import io.codelex.flightplanner.domain.Airport;
 import io.codelex.flightplanner.domain.Flight;
+import io.codelex.flightplanner.domain.PageResult;
+import io.codelex.flightplanner.domain.SearchFlightsRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -22,8 +25,8 @@ public class FlightPlannerController {
     }
 
     @GetMapping("/admin-api/flights/{id}")
-    public Flight getFlight(@PathVariable String id) {
-        return flightPlannerService.getFlightDetails(id);
+    public Flight adminGetFlight(@PathVariable Long id) {
+        return flightPlannerService.findFlightById(id);
     }
 
     @PostMapping("/testing-api/clear")
@@ -33,14 +36,14 @@ public class FlightPlannerController {
 
     @PutMapping("/admin-api/flights")
     @ResponseStatus(HttpStatus.CREATED)
-    public Flight saveFlight(@Valid @RequestBody Flight flight) {
+    public Flight adminSaveFlight(@Valid @RequestBody Flight flight) {
         flightPlannerService.saveFlight(flight);
         return flight;
     }
 
     @DeleteMapping("/admin-api/flights/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteFlight(@PathVariable Long id) {
+    public void adminDeleteFlight(@PathVariable Long id) {
         flightPlannerService.deleteFlight(id);
     }
 
@@ -50,5 +53,16 @@ public class FlightPlannerController {
         return flightPlannerService.getAirportDetails(search);
     }
 
+    @PostMapping("/api/flights/search")
+    @ResponseStatus(HttpStatus.OK)
+    public PageResult<Flight> searchFlights(@Valid @RequestBody SearchFlightsRequest request) {
+        return flightPlannerService.searchFlights(request);
+    }
+
+    @GetMapping("/api/flights/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Flight findFlightById(@PathVariable Long id) {
+        return flightPlannerService.findFlightById(id);
+    }
 
 }

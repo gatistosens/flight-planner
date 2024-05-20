@@ -2,6 +2,8 @@ package io.codelex.flightplanner;
 
 import io.codelex.flightplanner.domain.Airport;
 import io.codelex.flightplanner.domain.Flight;
+import io.codelex.flightplanner.domain.PageResult;
+import io.codelex.flightplanner.domain.SearchFlightsRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -35,16 +37,24 @@ public class FlightPlannerService {
     }
 
 
-    public Flight getFlightDetails(String id) {
-        Flight flight = flightPlannerRepository.getFlightById(Long.parseLong(id));
+    public Flight findFlightById(Long id) {
+        Flight flight = flightPlannerRepository.getFlightById(id);
         if (flight == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Flight not found");
         }
         return flight;
     }
 
     public List<Airport> getAirportDetails(String searchParam) {
         return flightPlannerRepository.getAirport(searchParam);
+    }
+
+    public PageResult<Flight> searchFlights(SearchFlightsRequest request) {
+        if (request.getFrom().equalsIgnoreCase(request.getTo())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "From and To are the same");
+        }
+        List<Flight> flights = flightPlannerRepository.searchFlights(request);
+        return new PageResult<>(0L, (long) flights.size(), flights);
     }
 
 

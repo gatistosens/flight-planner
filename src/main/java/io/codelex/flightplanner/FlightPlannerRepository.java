@@ -2,6 +2,7 @@ package io.codelex.flightplanner;
 
 import io.codelex.flightplanner.domain.Airport;
 import io.codelex.flightplanner.domain.Flight;
+import io.codelex.flightplanner.domain.SearchFlightsRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -40,13 +41,20 @@ public class FlightPlannerRepository {
 
     public List<Airport> getAirport(String searchParam) {
         Pattern pattern = Pattern.compile(Pattern.quote(searchParam.trim()), Pattern.CASE_INSENSITIVE);
-
         return flights.stream()
                 .map(Flight::getFrom)
                 .distinct()
                 .filter(airport -> pattern.matcher(airport.getAirport()).find() ||
                         pattern.matcher(airport.getCountry()).find() ||
                         pattern.matcher(airport.getCity()).find())
+                .toList();
+    }
+
+    public List<Flight> searchFlights(SearchFlightsRequest request) {
+        return flights.stream()
+                .filter(flight -> flight.getFrom().getAirport().equalsIgnoreCase(request.getFrom())
+                        && flight.getTo().getAirport().equalsIgnoreCase(request.getTo())
+                        && flight.getDepartureTime().startsWith(request.getDepartureDate()))
                 .toList();
     }
 

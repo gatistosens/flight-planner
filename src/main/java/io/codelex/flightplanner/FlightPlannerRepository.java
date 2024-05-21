@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 @Repository
 public class FlightPlannerRepository {
 
-    private final List<Flight> flights = new ArrayList<>();
+    private final List<Flight> flights = new CopyOnWriteArrayList<>();
     private final AtomicLong lastId = new AtomicLong(0);
 
 

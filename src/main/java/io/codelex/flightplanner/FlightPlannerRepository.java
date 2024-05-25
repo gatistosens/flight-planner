@@ -17,12 +17,10 @@ public class FlightPlannerRepository {
     private final List<Flight> flights = new CopyOnWriteArrayList<>();
     private final AtomicLong lastId = new AtomicLong(0);
 
-
     public void saveFlight(Flight flight) {
         flight.setId(lastId.incrementAndGet());
         flights.add(flight);
     }
-
 
     public Flight getFlightById(long id) {
         Flight flightDetails = null;

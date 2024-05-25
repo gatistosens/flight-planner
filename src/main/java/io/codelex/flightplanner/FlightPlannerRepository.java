@@ -1,9 +1,11 @@
 package io.codelex.flightplanner;
+
 import io.codelex.flightplanner.domain.Airport;
 import io.codelex.flightplanner.domain.Flight;
 import io.codelex.flightplanner.domain.SearchFlightsRequest;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicLong;
@@ -49,10 +51,11 @@ public class FlightPlannerRepository {
     }
 
     public List<Flight> searchFlights(SearchFlightsRequest request) {
+        LocalDate searchDate = request.getDepartureDate();
         return flights.stream()
                 .filter(flight -> flight.getFrom().getAirport().equalsIgnoreCase(request.getFrom())
                         && flight.getTo().getAirport().equalsIgnoreCase(request.getTo())
-                        && flight.getDepartureTime().startsWith(request.getDepartureDate()))
+                        && flight.getDepartureTime().toLocalDate().isEqual(searchDate))
                 .toList();
     }
 

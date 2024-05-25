@@ -8,8 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-
 import java.util.List;
+
 
 @Service
 public class FlightPlannerService {
@@ -75,7 +75,7 @@ public class FlightPlannerService {
     }
 
     private static void checkIfDatesAreValid(Flight flight) {
-        if (flight.getDepartureTime().compareTo(flight.getArrivalTime()) >= 0) {
+        if (flight.getDepartureTime().isAfter(flight.getArrivalTime()) || flight.getDepartureTime().isEqual(flight.getArrivalTime())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Departure time must be before arrival time.");
         }
     }

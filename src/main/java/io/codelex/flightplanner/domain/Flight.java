@@ -1,11 +1,12 @@
 package io.codelex.flightplanner.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-
+import java.time.LocalDateTime;
 import java.util.Objects;
-
 
 public class Flight {
     private Long id;
@@ -15,15 +16,17 @@ public class Flight {
     private Airport to;
     @NotBlank
     private String carrier;
-    @NotBlank
-    private String departureTime;
-    @NotBlank
-    private String arrivalTime;
+    @NotNull
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime departureTime;
+    @NotNull
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime arrivalTime;
 
     public Flight() {
     }
 
-    public Flight(Airport fromAirport, Airport toAirport, String carrier, String departureTime, String arrivalTime) {
+    public Flight(Airport fromAirport, Airport toAirport, String carrier, LocalDateTime departureTime, LocalDateTime arrivalTime) {
         this.from = fromAirport;
         this.to = toAirport;
         this.carrier = carrier;
@@ -63,19 +66,19 @@ public class Flight {
         this.carrier = carrier;
     }
 
-    public String getDepartureTime() {
+    public LocalDateTime getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(String departureTime) {
+    public void setDepartureTime(LocalDateTime departureTime) {
         this.departureTime = departureTime;
     }
 
-    public String getArrivalTime() {
+    public LocalDateTime getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(String arrivalTime) {
+    public void setArrivalTime(LocalDateTime arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 
@@ -103,5 +106,3 @@ public class Flight {
                 '}';
     }
 }
-
-

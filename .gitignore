@@ -35,3 +35,19 @@ out/
 
 ### VS Code ###
 .vscode/
+/src/test/
+/test/
+/jest.config.js
+/package.json
+/package-lock.json
+/README.md
+/tsconfig.json
+/src/AdminFlightApi.ts
+/src/axios.ts
+/src/CustomerFlightApi.ts
+/src/formatting.ts
+/src/index.ts
+/src/TestApi.ts
+/node_modules/
+/src/api/
+/src/demo-data/

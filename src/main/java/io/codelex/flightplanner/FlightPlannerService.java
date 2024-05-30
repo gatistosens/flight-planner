@@ -7,7 +7,6 @@ import io.codelex.flightplanner.domain.SearchFlightsRequest;
 
 import java.util.List;
 
-
 public interface FlightPlannerService {
 
     void saveFlight(Flight flight);

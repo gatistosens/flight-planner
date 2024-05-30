@@ -1,4 +1,4 @@
-package io.codelex.flightplanner.util;
+package io.codelex.flightplanner;
 
 import io.codelex.flightplanner.domain.Flight;
 import org.springframework.http.HttpStatus;

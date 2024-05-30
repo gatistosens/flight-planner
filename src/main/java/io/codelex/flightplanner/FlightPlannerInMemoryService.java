@@ -4,7 +4,6 @@ import io.codelex.flightplanner.domain.Airport;
 import io.codelex.flightplanner.domain.Flight;
 import io.codelex.flightplanner.domain.PageResult;
 import io.codelex.flightplanner.domain.SearchFlightsRequest;
-import io.codelex.flightplanner.util.FlightValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -12,34 +11,34 @@ import java.util.List;
 
 public class FlightPlannerInMemoryService implements FlightPlannerService {
 
-    private final FlightPlannerRepository flightPlannerRepository;
+    private final FlightPlannerInMemoryRepository flightPlannerInMemoryRepository;
 
-    public FlightPlannerInMemoryService(FlightPlannerRepository flightPlannerRepository) {
-        this.flightPlannerRepository = flightPlannerRepository;
+    public FlightPlannerInMemoryService(FlightPlannerInMemoryRepository flightPlannerRepository) {
+        this.flightPlannerInMemoryRepository = flightPlannerRepository;
     }
 
     @Override
     public void clearFlights() {
-        flightPlannerRepository.clearFlights();
+        flightPlannerInMemoryRepository.clearFlights();
     }
 
     @Override
     public void saveFlight(Flight flight) {
-        List<Flight> existingFlights = flightPlannerRepository.getFlights();
+        List<Flight> existingFlights = flightPlannerInMemoryRepository.getFlights();
         FlightValidator.checkIfDuplicateFlight(flight, existingFlights);
         FlightValidator.checkIfSameAirportToAndFrom(flight);
         FlightValidator.checkIfDatesAreValid(flight);
-        flightPlannerRepository.saveFlight(flight);
+        flightPlannerInMemoryRepository.saveFlight(flight);
     }
 
     @Override
     public void deleteFlight(Long id) {
-        flightPlannerRepository.deleteFlightById(id);
+        flightPlannerInMemoryRepository.deleteFlightById(id);
     }
 
     @Override
     public Flight findFlightById(Long id) {
-        Flight flight = flightPlannerRepository.getFlightById(id);
+        Flight flight = flightPlannerInMemoryRepository.getFlightById(id);
         if (flight == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Flight not found");
         }
@@ -48,7 +47,7 @@ public class FlightPlannerInMemoryService implements FlightPlannerService {
 
     @Override
     public List<Airport> getAirportDetails(String searchParam) {
-        return flightPlannerRepository.getAirport(searchParam);
+        return flightPlannerInMemoryRepository.getAirport(searchParam);
     }
 
     @Override
@@ -56,7 +55,7 @@ public class FlightPlannerInMemoryService implements FlightPlannerService {
         if (request.getFrom().equalsIgnoreCase(request.getTo())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "From and To are the same");
         }
-        List<Flight> flights = flightPlannerRepository.searchFlights(request);
+        List<Flight> flights = flightPlannerInMemoryRepository.searchFlights(request);
         return new PageResult<>(0L, (long) flights.size(), flights);
     }
 }

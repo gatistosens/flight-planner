@@ -1,11 +1,9 @@
--- liquibase formated sql
---changeset gatis:1
-
-create table AIRPORT
+-- liquibase formatted sql
+-- changeset gatis:1
+CREATE TABLE AIRPORT
 (
-    id serial primary key,
-    country varchar not null ,
-    city varchar not null ,
-    airport varchar not null
-
-)
+    id      SERIAL PRIMARY KEY,
+    country VARCHAR NOT NULL,
+    city    VARCHAR NOT NULL,
+    airport VARCHAR NOT NULL
+);

@@ -22,7 +22,7 @@ To run this project, you need to have the following installed:
 1. **Clone the repository:**
 
    ```sh
-   git clone https://github.com/yourusername/flight-planner.git
+   git clone https://github.com/gatistosens/flight-planner.git
    cd flight-planner
    
 2. Build the project:

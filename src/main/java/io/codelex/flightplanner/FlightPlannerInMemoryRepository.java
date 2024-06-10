@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.Pattern;
 
 @Repository
-public class FlightPlannerRepository {
+public class FlightPlannerInMemoryRepository {
 
     private final List<Flight> flights = new CopyOnWriteArrayList<>();
     private final AtomicLong lastId = new AtomicLong(0);
@@ -36,7 +36,6 @@ public class FlightPlannerRepository {
         flights.removeIf(flight -> flight.getId() == id);
     }
 
-
     public List<Airport> getAirport(String searchParam) {
         Pattern pattern = Pattern.compile(Pattern.quote(searchParam.trim()), Pattern.CASE_INSENSITIVE);
         return flights.stream()
@@ -56,7 +55,6 @@ public class FlightPlannerRepository {
                         && flight.getDepartureTime().toLocalDate().isEqual(searchDate))
                 .toList();
     }
-
 
     public List<Flight> getFlights() {
         return flights;

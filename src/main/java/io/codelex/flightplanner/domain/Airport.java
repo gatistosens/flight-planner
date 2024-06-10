@@ -1,14 +1,22 @@
 package io.codelex.flightplanner.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Objects;
 
-
+@Entity
 public class Airport {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
+    private Long id;
     @NotBlank
     @NotNull
     private String country;
@@ -27,6 +35,14 @@ public class Airport {
 
     public Airport() {
 
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getCountry() {
@@ -73,4 +89,6 @@ public class Airport {
                 ", airport='" + airport + '\'' +
                 '}';
     }
+
+
 }

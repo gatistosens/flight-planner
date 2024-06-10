@@ -2,7 +2,7 @@ package io.codelex.flightplanner.domain;
 
 import java.util.List;
 
-public class PageResult <T> {
+public class PageResult<T> {
     private Long page;
     private Long totalItems;
     private List<T> items;

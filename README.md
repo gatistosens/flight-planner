@@ -59,20 +59,17 @@ The application will start on port `8080` by default. You can access the H2 data
 
 ### Example Requests
 
-**Search Flights:**
-
+- **Search Flights:** `POST /api/flights/search`
 ```json
-POST /api/flights/search
 {
   "from": "JFK",
   "to": "LAX",
   "departureDate": "2024-06-15"
 }
 ```
-**Add a Flight:**
-
+- **Add a Flight:** `PUT /admin-api/flights`
 ```json
-PUT /admin-api/flights
+
 {
   "from": {
     "country": "USA",

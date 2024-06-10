@@ -85,9 +85,10 @@ PUT /admin-api/flights
     "airport": "LAX"
   },
   "carrier": "Delta",
-  "departureTime": "2024-06-15T10:00",
-  "arrivalTime": "2024-06-15T13:00"
+  "departureTime": "2024-06-15 10:00",
+  "arrivalTime": "2024-06-15 13:00"
 }
+
 ```
 ## Security Configuration
 

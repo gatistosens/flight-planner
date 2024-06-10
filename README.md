@@ -9,7 +9,7 @@ Welcome to the Flight Planner application! This project allows you to manage and
 - [API Endpoints](#api-endpoints)
 - [Security Configuration](#security-configuration)
 - [Database Configuration](#database-configuration)
-- [Testing](#testing)
+- [Technologies Used](#technologies-used)
 
 ## Prerequisites
 
